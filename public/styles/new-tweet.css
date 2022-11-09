@@ -1,4 +1,5 @@
 .new-tweet {
+  margin-top: 1em;
   width: 100%;
 }
 
@@ -10,26 +11,22 @@ form {
   box-sizing: border-box;
 }
 
-textarea {
-  background-color: inherit;
-  color: inherit;
-  border: none;
-  border-bottom: 3px solid black;
-  padding-bottom: 1em;
-  font-size: 20px;
-  font-weight: 500;
-}
-
-main button {
+form button {
   color: white;
   background-color: #4056a1;
   margin-top: 1em;
-  display: flex;
   border: none;
-  justify-content: space-between;
+  border-radius: 2px;
   font-family: 'Bungee', sans-serif;
 }
 
+#tweet-text {
+  border: none;
+  border-bottom: 0.25em solid #545149;
+  background-color: inherit;
+  height: 1,5em;
+  margin-top: 0.5em;
+}
 
 main .counter {
   display: flex;
