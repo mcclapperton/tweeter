@@ -24,15 +24,21 @@ form button {
   border: none;
   border-bottom: 0.25em solid #545149;
   background-color: inherit;
+  color: #545149;
   height: 1,5em;
   margin-top: 0.5em;
+  font-family: 'Bungee', sans-serif;
+ 
 }
 
-main .counter {
+.counter {
   display: flex;
   align-items: flex-end;
   flex-direction: row-reverse;
   color: #545149;
   font-family: 'Bungee', sans-serif;
-  font-weight: bold;
+}
+
+.invalid {
+  color: red;
 }
