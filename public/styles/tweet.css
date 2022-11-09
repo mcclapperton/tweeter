@@ -28,13 +28,24 @@ border-bottom: #545149 4px solid;
 
 article footer{
   font-size: medium;
-  font-weight: 600
+  font-weight: 600;
 }
 
-article footer .icons {
-  color: #4056a1;
+/* article footer .icons {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+} */
+
+article footer .fa-solid {
+  color: #4056a1;
+ 
   margin: 4px;
+  float: right;
+}
+
+footer .fa-solid:hover{
+  color: #c48f40;
+}
+
+.tweet:hover {
+  box-shadow: 10px 10px #98a0b7
 }
