@@ -30,12 +30,13 @@ form button {
   height: 1,5em;
   margin-top: 0.5em;
   font-family: 'Bungee', sans-serif;
- 
+
 }
 
 .counter {
   display: flex;
   align-items: flex-end;
+
   flex-direction: row-reverse;
   color: #545149;
   font-family: 'Bungee', sans-serif;

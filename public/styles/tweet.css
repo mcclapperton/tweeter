@@ -21,9 +21,12 @@
   color:#afb6b4;
 }
 
-article .words {
-font-weight: 900;
+article .content {
+font-weight: 600;
 border-bottom: #545149 4px solid;
+color:hsl(40, 3%, 45%);
+padding: 1em;
+margin: 0;
 }
 
 article footer{
@@ -31,15 +34,31 @@ article footer{
   font-weight: 600;
 }
 
-/* article footer .icons {
+article footer p{
   display: flex;
-} */
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
 
-article footer .fa-solid {
+article .name {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+article footer .icons {
   color: #4056a1;
- 
   margin: 4px;
-  float: right;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1em
+  ;
+
+
 }
 
 footer .fa-solid:hover{
