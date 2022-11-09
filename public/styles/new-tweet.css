@@ -9,6 +9,8 @@ form {
   color: #545149;
   font-weight: bold;
   box-sizing: border-box;
+  display: flex;
+  
 }
 
 form button {
@@ -22,7 +24,7 @@ form button {
 
 #tweet-text {
   border: none;
-  border-bottom: 0.25em solid #545149;
+  border-bottom: 0.15em solid #545149;
   background-color: inherit;
   color: #545149;
   height: 1,5em;

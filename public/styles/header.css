@@ -6,8 +6,7 @@ header {
   background-color:rgb(186, 186, 253);
   width: 100%;
   height: 520px;
-  background-image: url("https://www.transparenttextures.com/patterns/arches.png");;
-/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png");
 }
 h2 {
   display: flex;
