@@ -4,7 +4,7 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-// Test / driver code (temporary). Eventually will get this from the server.
+// const { response } = require("express");
 
 $(document).ready(function () {
   const data = [
@@ -37,7 +37,6 @@ $(document).ready(function () {
   // appends return val to tweets container
   const renderTweets = function (tweets) {
     for (let tweet of tweets) {
-      console.log(tweet);
       let $tweet = createTweetElement(tweet);
       $("#tweets-container").append($tweet);
     }
@@ -65,8 +64,17 @@ $(document).ready(function () {
           </div>
       </footer>
     </article>`);
-    console.log("tweet:", $tweet);
     return $tweet;
   };
   renderTweets(data);
+
+  // event listener
+  $(".new-tweet form").submit(function (event) {
+    // prevent def event (page reload?)
+    event.preventDefault();
+    // turns form data --> query string
+    const serialized = $(event.target).serialize();
+    // post req. sends serialized data to server
+    $.ajax("/tweets", { method: "POST", data: serialized });
+  });
 });
