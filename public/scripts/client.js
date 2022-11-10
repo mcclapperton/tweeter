@@ -4,33 +4,31 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-// const { response } = require("express");
-
 $(document).ready(function () {
-  const data = [
-    {
-      user: {
-        name: "Newton",
-        avatars: "https://i.imgur.com/73hZDYK.png",
-        handle: "@SirIsaac",
-      },
-      content: {
-        text: "If I have seen further it is by standing on the shoulders of giants",
-      },
-      created_at: 1461116232227,
-    },
-    {
-      user: {
-        name: "Descartes",
-        avatars: "https://i.imgur.com/nlhLi3I.png",
-        handle: "@rd",
-      },
-      content: {
-        text: "Je pense , donc je suis",
-      },
-      created_at: 1461113959088,
-    },
-  ];
+  // const data = [
+  //   {
+  //     user: {
+  //       name: "Newton",
+  //       avatars: "https://i.imgur.com/73hZDYK.png",
+  //       handle: "@SirIsaac",
+  //     },
+  //     content: {
+  //       text: "If I have seen further it is by standing on the shoulders of giants",
+  //     },
+  //     created_at: 1461116232227,
+  //   },
+  //   {
+  //     user: {
+  //       name: "Descartes",
+  //       avatars: "https://i.imgur.com/nlhLi3I.png",
+  //       handle: "@rd",
+  //     },
+  //     content: {
+  //       text: "Je pense , donc je suis",
+  //     },
+  //     created_at: 1461113959088,
+  //   },
+  // ];
 
   // loop through tweets
   // calls createTweetElement for ea
@@ -42,13 +40,29 @@ $(document).ready(function () {
     }
   };
 
+  // uses jquery to make req. to /tweets and receive arr of tweets as JSON
+  const loadTweets = function () {
+    $.ajax("/tweets", { method: "GET" }).then(function (tweets) {
+      renderTweets(tweets);
+    });
+  };
+  loadTweets();
+
+  // // displays time passed since a tweet
+  // const timeAgo = function () {
+  //   let updatedTime = format(tweet.created_at);
+  //   console.log(updatedTime);
+  // };
+
   // takes in a tweet object and returns a tweet <article> element
   const createTweetElement = function (tweet) {
     const $tweet = $(`
     <article class="tweet">
       <header>
         <div>
-          <p class="name"><img src="${tweet.user.avatars}"> ${tweet.user.name}</p>
+          <p class="name"><img src="${tweet.user.avatars}"> ${
+      tweet.user.name
+    }</p>
         </div>
         <div class="handle">
         <span>${tweet.user.handle}</span>
@@ -56,7 +70,7 @@ $(document).ready(function () {
       </header>
         <p class ="content">${tweet.content.text}</p>
       <footer>
-        <p>${tweet.created_at}<p>
+        <p>${$.timeago(tweet.created_at)}<p>
         <div class="icons">
             <i class="fa-solid fa-heart"></i>
             <i class="fa-solid fa-retweet"></i>
@@ -66,7 +80,7 @@ $(document).ready(function () {
     </article>`);
     return $tweet;
   };
-  renderTweets(data);
+  // renderTweets(data);
 
   // event listener
   $(".new-tweet form").submit(function (event) {
