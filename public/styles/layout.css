@@ -32,3 +32,11 @@ body {
   margin: auto;
 }
 
+.errorMsg {
+  display: flex;
+  color: red;
+  border: red 3px solid;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 400;
+}

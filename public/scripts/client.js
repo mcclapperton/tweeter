@@ -29,6 +29,12 @@ $(document).ready(function () {
   //     created_at: 1461113959088,
   //   },
   // ];
+  // Preventing XSS with Escaping
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
 
   // loop through tweets
   // calls createTweetElement for ea
@@ -47,19 +53,8 @@ $(document).ready(function () {
     });
   };
 
-  //check if tweet length is 0, or over 140 char
-  const validateTweet = function () {
-    const $tweetCharLength = $(`textarea`).val().length;
-    if ($tweetCharLength > 140) {
-      $(alert(`Tweet too long! Please shorten to 140 characters.`));
-      return false;
-    } else if (!$tweetCharLength) {
-      $(alert(`Tweet is empty! Please add content.`));
-      return false;
-    }
-
-    return true;
-  };
+  // hides error if no problems
+  $(".errorMsg").slideUp().text("");
 
   // takes in a tweet object and returns a tweet <article> element
   const createTweetElement = function (tweet) {
@@ -67,17 +62,17 @@ $(document).ready(function () {
     <article class="tweet">
       <header>
         <div>
-          <p class="name"><img src="${tweet.user.avatars}"> ${
+          <p class="name"><img src="${escape(tweet.user.avatars)}"> ${escape(
       tweet.user.name
-    }</p>
+    )}</p>
         </div>
         <div class="handle">
-        <span>${tweet.user.handle}</span>
+        <span>${escape(tweet.user.handle)}</span>
         </div>
       </header>
-        <p class ="content">${tweet.content.text}</p>
+        <p class ="content">${escape(tweet.content.text)}</p>
       <footer>
-        <p>${$.timeago(tweet.created_at)}<p>
+        <p>${escape($.timeago(tweet.created_at))}<p>
         <div class="icons">
             <i class="fa-solid fa-heart"></i>
             <i class="fa-solid fa-retweet"></i>
@@ -95,15 +90,27 @@ $(document).ready(function () {
     event.preventDefault();
     // turns form data --> query string
     const serialized = $(event.target).serialize();
-    // post req. sends serialized data to server
-    if (validateTweet()) {
-      $.ajax("/tweets", { method: "POST", data: serialized }).then(() => {
-        // calls loadtweets
-        loadTweets();
-        // textarea and counter reset after submit
-        $("textarea").val("");
-        $("output");
-      });
+
+    // error handling, if empty or over 140 char
+    const $tweetCharLength = $(`textarea`).val().length;
+    if ($tweetCharLength > 140) {
+      return $(".errorMsg")
+        .text("!! Tweet too long! Please shorten to 140 characters. !!")
+        .slideDown();
     }
+    if (!$tweetCharLength) {
+      return $(".errorMsg")
+        .text(`!! Tweet is empty! Please add content. !!`)
+        .slideDown();
+    }
+    $(".errorMsg").slideUp().text("");
+    // post req. sends serialized data to server
+    $.ajax("/tweets", { method: "POST", data: serialized }).then(() => {
+      // calls loadtweets
+      loadTweets();
+      // textarea and counter reset after submit
+      $("textarea").val("");
+      $("output");
+    });
   });
 });
