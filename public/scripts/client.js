@@ -36,7 +36,7 @@ $(document).ready(function () {
   const renderTweets = function (tweets) {
     for (let tweet of tweets) {
       let $tweet = createTweetElement(tweet);
-      $("#tweets-container").append($tweet);
+      $("#tweets-container").prepend($tweet);
     }
   };
 
@@ -48,11 +48,19 @@ $(document).ready(function () {
   };
   loadTweets();
 
-  // // displays time passed since a tweet
-  // const timeAgo = function () {
-  //   let updatedTime = format(tweet.created_at);
-  //   console.log(updatedTime);
-  // };
+  //check if tweet length is 0, or over 140 char
+  const validateTweet = function () {
+    const $tweetCharLength = $(`textarea`).val().length;
+    if ($tweetCharLength > 140) {
+      $(alert(`Tweet too long! Please shorten to 140 characters.`));
+      return false;
+    } else if (!$tweetCharLength) {
+      $(alert(`Tweet is empty! Please add content.`));
+      return false;
+    }
+
+    return true;
+  };
 
   // takes in a tweet object and returns a tweet <article> element
   const createTweetElement = function (tweet) {
@@ -89,6 +97,8 @@ $(document).ready(function () {
     // turns form data --> query string
     const serialized = $(event.target).serialize();
     // post req. sends serialized data to server
-    $.ajax("/tweets", { method: "POST", data: serialized });
+    if (validateTweet()) {
+      $.ajax("/tweets", { method: "POST", data: serialized });
+    }
   });
 });
