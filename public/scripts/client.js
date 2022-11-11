@@ -46,7 +46,6 @@ $(document).ready(function () {
       renderTweets(tweets);
     });
   };
-  loadTweets();
 
   //check if tweet length is 0, or over 140 char
   const validateTweet = function () {
@@ -98,7 +97,13 @@ $(document).ready(function () {
     const serialized = $(event.target).serialize();
     // post req. sends serialized data to server
     if (validateTweet()) {
-      $.ajax("/tweets", { method: "POST", data: serialized });
+      $.ajax("/tweets", { method: "POST", data: serialized }).then(() => {
+        // calls loadtweets
+        loadTweets();
+        // textarea and counter reset after submit
+        $("textarea").val("");
+        $("output");
+      });
     }
   });
 });
