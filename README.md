@@ -19,6 +19,9 @@ This repository is the starter code for the project: Students will fork and clon
 - Node 5.10.x or above
 
 ##Screenshots
+
+
+
 Screenshot of landing page https://github.com/mcclapperton/tweeter/blob/master/docs/landing-page.png
 
 
