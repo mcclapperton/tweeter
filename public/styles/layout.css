@@ -19,16 +19,16 @@ body {
   background-color: #f4f1ec;
   font-size: 24px;
   font-family: 'Source Sans Pro', sans-serif;
-  margin:0
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: unset;
+  margin:0;
+  display:flex;
   flex-direction: column;
+}
+main {
   width: 90%;
   background-color: #f4f1ec;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
   margin: auto;
 }
 
@@ -39,4 +39,20 @@ body {
   flex-direction: column;
   align-items: center;
   font-weight: 400;
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 60%;
+    padding: 100px 35px 0 35px;
+
+  }
+
+   main {
+    width: 60%;
+    padding-right: 10px;
+    margin-right: 4%;
+  }
 }
