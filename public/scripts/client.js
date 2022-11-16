@@ -10,6 +10,7 @@ $(document).ready(function () {
   // calls createTweetElement for ea
   // appends return val to tweets container
   const renderTweets = function (tweets) {
+    $("#tweets-container").empty();
     for (let tweet of tweets) {
       let $tweet = createTweetElement(tweet);
       $("#tweets-container").prepend($tweet);
@@ -22,7 +23,8 @@ $(document).ready(function () {
       renderTweets(tweets);
     });
   };
-
+  // load tweets
+  loadTweets();
   // hides error if no error
   $(".errorMsg").slideUp().text("");
 
@@ -32,9 +34,9 @@ $(document).ready(function () {
     <article class="tweet">
       <header>
         <div>
-          <p class="name"><img src="${escape(tweet.user.avatars)}"> ${escape(
+          <p class="name"><img src="${tweet.user.avatars}"> ${
       tweet.user.name
-    )}</p>
+    }</p>
         </div>
         <div class="handle">
         <span>${escape(tweet.user.handle)}</span>
@@ -42,7 +44,7 @@ $(document).ready(function () {
       </header>
         <p class ="content">${escape(tweet.content.text)}</p>
       <footer>
-        <p>${escape($.timeago(tweet.created_at))}<p>
+        <p>${$.timeago(tweet.created_at)}<p>
         <div class="icons">
             <i class="fa-solid fa-heart"></i>
             <i class="fa-solid fa-retweet"></i>
@@ -52,9 +54,6 @@ $(document).ready(function () {
     </article>`);
     return $tweet;
   };
-
-  // load tweets
-  loadTweets();
 
   // event listener
   $(".new-tweet form").submit(function (event) {
@@ -79,12 +78,17 @@ $(document).ready(function () {
     // slides up again if no error
     $(".errorMsg").slideUp().text("");
     // post req. sends serialized data to server
-    $.ajax("/tweets", { method: "POST", data: serialized }).then(() => {
-      // calls loadtweets
-      loadTweets();
-      // textarea and counter reset after submit
-      $("textarea").val("");
-      $("output").val(140);
-    });
+    $.ajax("/tweets", { method: "POST", data: serialized })
+      .then(() => {
+        // calls loadtweets
+        loadTweets();
+        // textarea and counter reset after submit
+        $("textarea").val("");
+        $("output").val(140);
+      })
+      // if fail, log error
+      .fail((error) => {
+        alert(`error: ${error}, please try again`);
+      });
   });
 });

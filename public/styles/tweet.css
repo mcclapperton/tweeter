@@ -15,11 +15,7 @@ article header {
   height: fit-content;
   justify-content: space-between;
   align-items: center;
-}
-
-.handle {
-  font-weight: bold;
-  color:#afb6b4;
+  
 }
 
 article .content {
@@ -28,6 +24,7 @@ border-bottom: #545149 4px solid;
 color:hsl(40, 3%, 45%);
 padding: 1em;
 margin: 0;
+overflow-wrap: break-word;
 }
 
 article footer{
