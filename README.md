@@ -22,8 +22,8 @@ This repository is the starter code for the project: Students will fork and clon
 
 
 
-Screenshot of landing page https://github.com/mcclapperton/tweeter/blob/master/docs/landing-page.png
+![Screenshot of landing page](https://github.com/mcclapperton/tweeter/blob/master/docs/landing-page.png)
 
 
 
-Screenshot of tweet https://github.com/mcclapperton/tweeter/blob/master/docs/tweet.png
+![Screenshot of tweet](https://github.com/mcclapperton/tweeter/blob/master/docs/tweet.png)
