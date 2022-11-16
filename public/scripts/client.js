@@ -84,7 +84,7 @@ $(document).ready(function () {
       loadTweets();
       // textarea and counter reset after submit
       $("textarea").val("");
-      $("output");
+      $("output").val(140);
     });
   });
 });
