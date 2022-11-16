@@ -86,7 +86,7 @@ $(document).ready(function () {
         $("textarea").val("");
         $("output").val(140);
       })
-      // if fail, log error
+      // if fail, alert error
       .fail((error) => {
         alert(`error: ${error}, please try again`);
       });
